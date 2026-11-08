@@ -17,8 +17,6 @@ t_node* create_node(char c){
     return n;
 }
 
-
-
 int insert_left(t_node *pai, char c){
     if(pai == NULL || pai->left != NULL) return 0;
     pai->left = create_node(c);
@@ -29,6 +27,32 @@ int insert_right(t_node *pai, char c){
     if(pai == NULL || pai->right != NULL) return 0;
     pai->right = create_node(c);
     return pai->right != NULL;
+}
+
+int remove_left_promote(t_node *pai){
+    if (pai == NULL || pai->left == NULL) return 0;
+
+    t_node *alvo = pai->left;
+    if (alvo->left != NULL && alvo->right != NULL) return 0; /* 2 filhos: recusa */
+
+    t_node *promovido = (alvo->left != NULL) ? alvo->left : alvo->right;
+
+    pai->left = promovido;
+    free(alvo);
+    return 1;
+}
+
+int remove_right_promote(t_node *pai){
+    if (pai == NULL || pai->right == NULL) return 0;
+
+    t_node *alvo = pai->right;
+    if (alvo->left != NULL && alvo->right != NULL) return 0; /* 2 filhos: recusa */
+
+    t_node *promovido = (alvo->left != NULL) ? alvo->left : alvo->right;
+
+    pai->right = promovido;
+    free(alvo);
+    return 1;
 }
 
 void pre_order(t_node *No){

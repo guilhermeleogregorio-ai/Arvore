@@ -11,6 +11,8 @@ t_node* create_tree(void);
 t_node* create_node(char c);
 int insert_left(t_node* root, char c);
 int insert_right(t_node* root, char c);
+int remove_left_promote (t_node* pai);
+int remove_right_promote(t_node* pai);
 void pre_order(t_node* root);
 void in_order(t_node* root);
 void post_order(t_node* root);
